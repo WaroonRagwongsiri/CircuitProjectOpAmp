@@ -23,6 +23,7 @@
 # define D3 33
 # define D4 32
 
+// Button
 # define BUTTON1 35
 # define BUTTON2 34
 # define BUTTON3 39
@@ -30,6 +31,9 @@
 
 // OpAmp
 void init_opamp(void);
+void init_button(void);
+void read_volt(void);
+void read_button(void);
 
 // Display
 void init_display(void);
