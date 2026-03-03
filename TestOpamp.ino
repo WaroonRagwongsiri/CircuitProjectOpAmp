@@ -23,6 +23,7 @@ void loop()
 	}
 
 	display_float_3dp_step(v_out);
+	delay(5);
 }
 
 void init_opamp(void)

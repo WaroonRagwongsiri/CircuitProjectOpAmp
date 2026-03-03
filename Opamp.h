@@ -3,14 +3,14 @@
 # include <cstdint>
 # include <SevSeg.h>
 
-# define V_OUT 14
-# define V_SRC1 26
-# define V_SRC2 33
+# define V_OUT 13
+# define V_SRC1 14
+# define V_SRC2 27
 
 // Segments
-# define A 13
-# define B 16
-# define C 17
+# define A 16
+# define B 17
+# define C 5
 # define D 18
 # define E 19
 # define F 21
@@ -18,15 +18,15 @@
 # define DP 23
 
 // Digits
-# define D1 25
-# define D2 27
-# define D3 32
-# define D4 15
+# define D1 26
+# define D2 25
+# define D3 33
+# define D4 32
 
-# define B1 25
-# define B2 27
-# define B3 32
-# define B4 15
+# define BUTTON1 35
+# define BUTTON2 34
+# define BUTTON3 39
+# define BUTTON4 36
 
 // OpAmp
 void init_opamp(void);
