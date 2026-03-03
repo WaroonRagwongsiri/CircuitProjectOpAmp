@@ -23,9 +23,13 @@
 # define D3 32
 # define D4 15
 
+# define B1 25
+# define B2 27
+# define B3 32
+# define B4 15
+
 // OpAmp
 void init_opamp(void);
-float truncate_float(float value);
 
 // Display
 void init_display(void);
