@@ -23,7 +23,6 @@ void loop()
 		display_int4_step(raw[current]);
 	else if (mode == 1)
 		display_float_3dp_step(volt[current]);
-	delay(5);
 }
 
 void init_opamp(void)
@@ -55,12 +54,34 @@ void read_volt(void)
 
 void read_button(void)
 {
-	if (digitalRead(BUTTON1) == HIGH)
-		current = 0;
-	if (digitalRead(BUTTON2) == HIGH)
-		current = 1;
-	if (digitalRead(BUTTON3) == HIGH)
-		current = 2;
-	if (digitalRead(BUTTON4) == HIGH)
-		mode ^= 1;
+	static uint32_t lastDebounceTime[4] = {0};
+	static uint8_t  lastState[4] = {HIGH, HIGH, HIGH, HIGH};
+
+	uint8_t pins[4] = {BUTTON1, BUTTON2, BUTTON3, BUTTON4};
+	uint32_t now = millis();
+
+	for (int i = 0; i < 4; i++)
+	{
+		uint8_t reading = digitalRead(pins[i]);
+
+		if (reading != lastState[i])
+		{
+			lastDebounceTime[i] = now;
+			lastState[i] = reading;
+		}
+
+		if ((now - lastDebounceTime[i]) > DEBOUNCE_MS)
+		{
+			if (reading == LOW)
+			{
+				switch (i)
+				{
+					case 0: current = 0; break;
+					case 1: current = 1; break;
+					case 2: current = 2; break;
+					case 3: mode ^= 1;  break;
+				}
+			}
+		}
+	}
 }

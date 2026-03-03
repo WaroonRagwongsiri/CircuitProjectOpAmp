@@ -40,4 +40,7 @@ void init_display(void);
 void display_float_3dp_step(float value);
 void display_int4_step(int value);
 
+// Debounce
+# define DEBOUNCE_MS 50
+
 #endif
