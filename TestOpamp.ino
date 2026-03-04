@@ -17,12 +17,13 @@ static int current = 0;
 
 void loop()
 {
-	read_button();
-	read_volt();
-	if (mode == 0)
-		display_int4_step(raw[current]);
-	else if (mode == 1)
-		display_float_3dp_step(volt[current]);
+	// read_button();
+	// read_volt();
+	// if (mode == 0)
+	// 	display_int4_step(raw[current]);
+	// else if (mode == 1)
+	// 	display_float_3dp_step(volt[current]);
+	display_float_3dp_step(2.761);
 }
 
 void init_opamp(void)

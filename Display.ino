@@ -8,7 +8,7 @@ void init_display(void)
 	byte digitPins[] = {D4, D3, D2, D1};
 	byte segmentPins[] = {A, B, C, D, E, F, G, DP};
 
-	bool resistorsOnSegments = true;
+	bool resistorsOnSegments = false;
 	byte hardwareConfig = COMMON_CATHODE;
 
 	sevseg.begin(hardwareConfig, numDigits, digitPins, segmentPins, resistorsOnSegments);

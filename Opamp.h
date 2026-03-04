@@ -8,19 +8,19 @@
 # define V_SRC2 27
 
 // Segments
-# define A 16
+# define A 33
 # define B 17
-# define C 5
-# define D 18
-# define E 19
-# define F 21
-# define G 22
-# define DP 23
+# define C 19
+# define D 22
+# define E 23
+# define F 25
+# define G 18
+# define DP 21
 
 // Digits
-# define D1 26
-# define D2 25
-# define D3 33
+# define D1 5
+# define D2 16
+# define D3 26
 # define D4 32
 
 // Button
