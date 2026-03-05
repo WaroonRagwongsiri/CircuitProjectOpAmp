@@ -34,6 +34,7 @@ void init_opamp(void);
 void init_button(void);
 void read_volt(void);
 void read_button(void);
+void toggle_button(void);
 
 // Display
 void init_display(void);

@@ -2,7 +2,7 @@
 
 void setup()
 {
-	Serial.begin(9600);
+	// Serial.begin(9600);
 
 	init_opamp();
 	init_display();
@@ -17,13 +17,14 @@ static int current = 0;
 
 void loop()
 {
-	// read_button();
-	// read_volt();
-	// if (mode == 0)
-	// 	display_int4_step(raw[current]);
-	// else if (mode == 1)
-	// 	display_float_3dp_step(volt[current]);
-	display_float_3dp_step(2.761);
+	read_button();
+	read_volt();
+	// Serial.printf("current : %d, mode : %d, raw_o : %d, raw_v1 : %d, raw_v2 : %d\n", current, mode, raw[0], raw[1], raw[2]);
+	if (mode == 0)
+		display_int4_step(raw[current]);
+	else if (mode == 1)
+		display_float_3dp_step(volt[current]);
+	// display_int4_step(8888);
 }
 
 void init_opamp(void)
@@ -55,34 +56,26 @@ void read_volt(void)
 
 void read_button(void)
 {
-	static uint32_t lastDebounceTime[4] = {0};
-	static uint8_t  lastState[4] = {HIGH, HIGH, HIGH, HIGH};
+	if (digitalRead(BUTTON1) == HIGH)
+		current = 0;
+	if (digitalRead(BUTTON2) == HIGH)
+		current = 1;
+	if (digitalRead(BUTTON3) == HIGH)
+		current = 2;
+	toggle_button();
+}
 
-	uint8_t pins[4] = {BUTTON1, BUTTON2, BUTTON3, BUTTON4};
-	uint32_t now = millis();
+void toggle_button(void)
+{
+	static unsigned long last_press_time = 0;
 
-	for (int i = 0; i < 4; i++)
+	if (digitalRead(BUTTON4) == HIGH)
 	{
-		uint8_t reading = digitalRead(pins[i]);
-
-		if (reading != lastState[i])
+		unsigned long now = millis();
+		if (now - last_press_time > DEBOUNCE_MS)
 		{
-			lastDebounceTime[i] = now;
-			lastState[i] = reading;
-		}
-
-		if ((now - lastDebounceTime[i]) > DEBOUNCE_MS)
-		{
-			if (reading == LOW)
-			{
-				switch (i)
-				{
-					case 0: current = 0; break;
-					case 1: current = 1; break;
-					case 2: current = 2; break;
-					case 3: mode ^= 1;  break;
-				}
-			}
+			mode ^= 1;
+			last_press_time = now;
 		}
 	}
 }
