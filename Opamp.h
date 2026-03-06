@@ -29,6 +29,8 @@
 # define BUTTON3 39
 # define BUTTON4 36
 
+# define NUMBER_MAX 20
+
 // OpAmp
 void init_opamp(void);
 void init_button(void);

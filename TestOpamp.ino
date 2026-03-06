@@ -11,6 +11,7 @@ void setup()
 
 static int raw[3] = {};
 static float volt[3] = {};
+static int clamped[3] = {};
 
 static int mode = 0;
 static int current = 0;
@@ -21,7 +22,7 @@ void loop()
 	read_volt();
 	// Serial.printf("current : %d, mode : %d, raw_o : %d, raw_v1 : %d, raw_v2 : %d\n", current, mode, raw[0], raw[1], raw[2]);
 	if (mode == 0)
-		display_int4_step(raw[current]);
+		display_int4_step(clamped[current]);
 	else if (mode == 1)
 		display_float_3dp_step(volt[current]);
 	// display_int4_step(8888);
@@ -52,6 +53,10 @@ void read_volt(void)
 	volt[0] = (raw[0] / 4095.0f) * 3.3f;
 	volt[1] = (raw[1] / 4095.0f) * 3.3f;
 	volt[2] = (raw[2] / 4095.0f) * 3.3f;
+
+	clamped[0] = map(raw[0], 0, 4095, 0, NUMBER_MAX);
+	clamped[1] = map(raw[1], 0, 4095, 0, NUMBER_MAX);
+	clamped[2] = map(raw[2], 0, 4095, 0, NUMBER_MAX);
 }
 
 void read_button(void)
