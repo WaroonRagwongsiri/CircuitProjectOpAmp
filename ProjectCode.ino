@@ -18,14 +18,23 @@ static int current = 0;
 
 void loop()
 {
-	read_button();
-	read_volt();
-	// Serial.printf("current : %d, mode : %d, raw_o : %d, raw_v1 : %d, raw_v2 : %d\n", current, mode, raw[0], raw[1], raw[2]);
-	if (mode == 0)
-		display_int4_step(clamped[current]);
-	else if (mode == 1)
-		display_float_3dp_step(volt[current]);
-	// display_int4_step(8888);
+	refresh_display();
+
+	static unsigned long lastUpdate = 0;
+	unsigned long now = millis();
+
+	if (now - lastUpdate >= 5)
+	{
+		lastUpdate = now;
+
+		read_button();
+		read_volt();
+
+		if (mode == 0)
+			display_int4_step(clamped[current]);
+		else
+			display_float_3dp_step(volt[current]);
+	}
 }
 
 void init_opamp(void)

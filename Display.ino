@@ -15,6 +15,11 @@ void init_display(void)
 	sevseg.setBrightness(90);
 }
 
+void refresh_display(void)
+{
+	sevseg.refreshDisplay();
+}
+
 void display_float_3dp_step(float value)
 {
 	if (value < 0.0f) value = 0.0f;

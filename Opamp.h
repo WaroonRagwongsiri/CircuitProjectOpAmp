@@ -27,7 +27,7 @@
 # define BUTTON1 35
 # define BUTTON2 34
 # define BUTTON3 39
-# define BUTTON4 36
+# define BUTTON4 4
 
 # define NUMBER_MAX 20
 
@@ -42,6 +42,7 @@ void toggle_button(void);
 void init_display(void);
 void display_float_3dp_step(float value);
 void display_int4_step(int value);
+void refresh_display(void);
 
 // Debounce
 # define DEBOUNCE_MS 50
