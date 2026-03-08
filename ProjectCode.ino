@@ -18,23 +18,17 @@ static int current = 0;
 
 void loop()
 {
-	refresh_display();
+	read_button();
+	read_volt();
 
-	static unsigned long lastUpdate = 0;
-	unsigned long now = millis();
+	// Serial.printf("b1: %5d, b2: %5d, b3: %5d, b4: %5d\n", analogRead(BUTTON1), analogRead(BUTTON2), analogRead(BUTTON3), analogRead(BUTTON4));
 
-	if (now - lastUpdate >= 5)
-	{
-		lastUpdate = now;
-
-		read_button();
-		read_volt();
-
-		if (mode == 0)
-			display_int4_step(clamped[current]);
-		else
-			display_float_3dp_step(volt[current]);
-	}
+	if (mode == 0)
+		display_int4_step(clamped[current]);
+	else
+		display_float_3dp_step(volt[current]);
+	// display_int4_step(clamped[current]);
+	// display_float_3dp_step(volt[current]);
 }
 
 void init_opamp(void)
@@ -70,11 +64,11 @@ void read_volt(void)
 
 void read_button(void)
 {
-	if (digitalRead(BUTTON1) == HIGH)
+	if (analogRead(BUTTON1) >= 3000)
 		current = 0;
-	if (digitalRead(BUTTON2) == HIGH)
+	if (analogRead(BUTTON2) >= 3000)
 		current = 1;
-	if (digitalRead(BUTTON3) == HIGH)
+	if (analogRead(BUTTON3) >= 3000)
 		current = 2;
 	toggle_button();
 }
@@ -83,7 +77,7 @@ void toggle_button(void)
 {
 	static unsigned long last_press_time = 0;
 
-	if (digitalRead(BUTTON4) == HIGH)
+	if (analogRead(BUTTON4) >= 3000)
 	{
 		unsigned long now = millis();
 		if (now - last_press_time > DEBOUNCE_MS)

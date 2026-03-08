@@ -27,7 +27,7 @@
 # define BUTTON1 35
 # define BUTTON2 34
 # define BUTTON3 39
-# define BUTTON4 4
+# define BUTTON4 36
 
 # define NUMBER_MAX 20
 
