@@ -45,6 +45,6 @@ void display_int4_step(int value);
 void refresh_display(void);
 
 // Debounce
-# define DEBOUNCE_MS 50
+# define DEBOUNCE_MS 200
 
 #endif

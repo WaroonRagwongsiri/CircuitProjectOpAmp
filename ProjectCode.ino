@@ -23,7 +23,7 @@ void loop()
 
 	// Serial.printf("b1: %5d, b2: %5d, b3: %5d, b4: %5d\n", analogRead(BUTTON1), analogRead(BUTTON2), analogRead(BUTTON3), analogRead(BUTTON4));
 
-	if (mode == 0)
+	if (mode == 1)
 		display_int4_step(clamped[current]);
 	else
 		display_float_3dp_step(volt[current]);
@@ -48,9 +48,9 @@ void init_button(void)
 
 void read_volt(void)
 {
-	raw[0] = analogRead(V_OUT);
 	raw[1] = analogRead(V_SRC1);
 	raw[2] = analogRead(V_SRC2);
+	raw[0] = analogRead(V_OUT);
 
 
 	volt[0] = (raw[0] / 4095.0f) * 3.3f;
